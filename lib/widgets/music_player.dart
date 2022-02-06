@@ -21,6 +21,7 @@ class _MusicPlayerState extends State<MusicPlayer> {
   Duration fullTime = Duration();
 
   bool isDrag = false;
+  double valume = 1;
   @override
   void initState() {
     player = AudioPlayer();
@@ -212,7 +213,45 @@ class _MusicPlayerState extends State<MusicPlayer> {
                     ),
                   ),
                 ],
-              )
+              ),
+              Container(
+                width: 250,
+                child: Column(
+                  children: [
+                    Container(
+                      height: 30,
+                      child: Slider(
+                        value: valume,
+                        activeColor: Colors.red,
+                        min: 0,
+                        max: 1,
+                        onChanged: (value) {
+                          setState(() {
+                            valume = value;
+                            player.setVolume(value);
+                          });
+                        },
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Icon(
+                            Icons.volume_down_rounded,
+                            color: Colors.red,
+                          ),
+                          Icon(
+                            Icons.volume_up_rounded,
+                            color: Colors.red,
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              ),
             ],
           ),
         ),
